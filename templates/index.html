@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Planner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Your Travel Planner</h1>
+        <p>Plan your perfect trip with ease!</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('show_destinations') }}">Destinations</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+
+        </ul>
+    </nav>
+
+    <section>
+        <h2>Find Your Next Destination</h2>
+        <form method="POST">
+            <input type="text" id="search" name="search" placeholder="Search for a place..." value="{{ search_query }}">
+            <button type="submit" id="search-btn">Search</button>
+        </form>
+
+        {% if results %}
+            <div class="results">
+                <h3>Search Results:</h3>
+                <ul>
+                    {% for place in results %}
+                        <li>{{ place }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% elif search_query %}
+            <div class="no-results">
+                <p>No destinations found for "<strong>{{ search_query }}</strong>".</p>
+            </div>
+        {% endif %}
+    </section>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

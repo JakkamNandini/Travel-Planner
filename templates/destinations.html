@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popular Destinations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+    <header>
+        <h1>Top Travel Destinations</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('show_destinations') }}">Destinations</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+
+        </ul>
+    </nav>
+
+    <section>
+        <h2>Explore These Beautiful Places:</h2>
+        <div class="destinations-grid">
+            {% for destination in destinations %}
+                <div class="destination-card">
+                    <img src="{{ url_for('static', filename='images/' + destination.replace(' ', '').lower() + '.jpg') }}" alt="{{ destination }}">
+                    <h3><a href="{{ url_for('destination_detail', name=destination) }}">{{ destination }}</a></h3>
+                    <p>Explore the beauty of {{ destination }}!</p>
+                </div>
+            {% endfor %}
+        </div>
+
+
+    </section>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
